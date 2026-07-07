@@ -545,6 +545,65 @@ const Dashboard = () => {
               >
                 Revisar Ahora
               </Link>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="bg-[#18181b] border border-gray-800 rounded-xl overflow-hidden flex flex-col p-5 md:col-span-2 lg:col-span-1 xl:col-span-2">
+                  <h2 className="font-bold flex items-center gap-2 uppercase text-sm tracking-widest border-b border-gray-800 pb-4 mb-4">
+                    <BarChartIcon size={18} className="text-purple-500" />{" "}
+                    Prendas más solicitadas (Periodo)
+                  </h2>
+                  <div className="flex-1 min-h-[250px] flex items-center justify-center">
+                    {stats.trajesData.length > 0 ? (
+                      <ResponsiveContainer width="100%" height={250}>
+                        <BarChart
+                          data={stats.trajesData}
+                          margin={{ top: 25, right: 10, left: -20, bottom: 0 }}
+                        >
+                          <CartesianGrid
+                            strokeDasharray="3 3"
+                            stroke="#27272a"
+                            vertical={false}
+                          />
+                          <XAxis
+                            dataKey="name"
+                            stroke="#9ca3af"
+                            fontSize={12}
+                            tickLine={false}
+                            axisLine={false}
+                          />
+                          <YAxis
+                            stroke="#9ca3af"
+                            fontSize={12}
+                            tickLine={false}
+                            axisLine={false}
+                            allowDecimals={false}
+                          />
+                          <Bar dataKey="value" radius={[4, 4, 0, 0]}>
+                            <LabelList
+                              dataKey="value"
+                              position="top"
+                              fill="#ffffff"
+                              fontSize={14}
+                              offset={10}
+                              fontWeight="bold"
+                            />
+                            {stats.trajesData.map((entry, index) => (
+                              <Cell
+                                key={`cell-${index}`}
+                                fill={COLORS[index % COLORS.length]}
+                              />
+                            ))}
+                          </Bar>
+                        </BarChart>
+                      </ResponsiveContainer>
+                    ) : (
+                      <p className="text-gray-500 italic text-sm">
+                        No hay datos suficientes para la gráfica en este
+                        periodo.
+                      </p>
+                    )}
+                  </div>
+                </div>
+              </div>
             </div>
           )}
 
