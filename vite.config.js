@@ -7,7 +7,6 @@ export default defineConfig({
   plugins: [
     react(),
     VitePWA({
-      filename: "manifest.json",
       registerType: "autoUpdate",
       includeAssets: ["favicon.ico"],
       workbox: {
